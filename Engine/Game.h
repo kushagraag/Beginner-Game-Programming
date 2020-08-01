@@ -39,6 +39,7 @@ private:
 	/********************************/
 private:
 	MainWindow& wnd;
+	//change 
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
