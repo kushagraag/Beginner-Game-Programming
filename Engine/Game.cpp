@@ -26,6 +26,7 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ), 
 	brd( gfx ),
+	snake({ 2, 2 }),
 	rng( std::random_device()() )
 {
 }
@@ -40,17 +41,32 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	if (wnd.kbd.KeyIsPressed(VK_UP))
+	{
+		delta_loc = { 0, -1 };
+	}
+	if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	{
+		delta_loc = { 0, 1 };
+	}
+	if (wnd.kbd.KeyIsPressed(VK_LEFT))
+	{
+		delta_loc = { -1, 0 };
+	}
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+	{
+		delta_loc = { 1, 0 };
+	}
+	
+	++snakeMoveCounter;
+	if (snakeMoveCounter >= snakeMovePeriod)
+	{
+		snakeMoveCounter = 0;
+		snake.MoveBy(delta_loc);
+	}
 }
 
 void Game::ComposeFrame()
 {
-	std::uniform_int_distribution<int> ColorDist(0, 255);
-	for (int y = 0; y < brd.GetBoardHeight(); y++) {
-		for (int  x = 0; x < brd.GetBoardWidth() ; x++)
-		{
-			Location loc = { x, y };
-			Color c(ColorDist(rng), ColorDist(rng), ColorDist(rng));
-			brd.DrawCell(loc, c);
-		}
-	}
+	snake.Draw(brd);
 }
