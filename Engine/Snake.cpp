@@ -39,9 +39,21 @@ Location Snake::GetNextHeadLocation(const Location& delta_loc)
 	return l;
 }
 
-bool Snake::InInTileExceptEnd(const Location& next) const
+bool Snake::IsInTileExceptEnd(const Location& next) const
 {
 	for (int i = 0; i < nSegments - 1 ; i++)
+	{
+		if (segments[i].GetLocation() == next)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Snake::IsInTile(const Location& next) const
+{
+	for (int i = 0; i < nSegments; i++)
 	{
 		if (segments[i].GetLocation() == next)
 		{
