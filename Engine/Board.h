@@ -11,6 +11,7 @@ public:
 	void DrawCell(const Location& loc, Color c);
 	int GetBoardWidth();
 	int GetBoardHeight();
+	bool IsInsideBoard(const Location loc) const;
 private:
 	static constexpr int dimension = 20;
 	static constexpr int width = 25;
