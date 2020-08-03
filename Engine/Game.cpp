@@ -87,25 +87,31 @@ void Game::UpdateModel()
 					}
 				}
 			}
+			++snakeSpeedupCounter;
+			if (snakeSpeedupCounter >= snakeSpeedupPeriod)
+			{
+				snakeSpeedupCounter = 0;
+				snakeMovePeriod = std::max(snakeMovePeriod - 1, snakeMovePeriodMin);
+			}
 		}
+	}
+	else {
+		gameIsStarted = wnd.kbd.KeyIsPressed(VK_RETURN);
 	}
 }
 
 void Game::ComposeFrame()
 {
-	brd.DrawBorder();
 	if (!gameIsStarted) {
 		SpriteCodex::DrawTitle(300, 225, gfx);
-		if (wnd.kbd.KeyIsPressed(VK_RETURN)) {
-			gameIsStarted = true;
-		}
 	}
 	else {
 		snake.Draw(brd);
 		goal.Draw(brd);
-	}
-	if (gameIsOver)
-	{
-		SpriteCodex::DrawGameOver(350, 270, gfx);
+		if (gameIsOver)
+		{
+			SpriteCodex::DrawGameOver(350, 270, gfx);
+		}
+		brd.DrawBorder();
 	}
 }

@@ -51,8 +51,11 @@ private:
 	Location delta_loc = { 1,0 };
 	std::mt19937 rng;
 	Goal goal;
-	static constexpr int snakeMovePeriod = 20;
+	int snakeMovePeriod = 20;
+	static constexpr int snakeMovePeriodMin = 4;
 	int snakeMoveCounter = 20;
+	static constexpr int snakeSpeedupPeriod = 180;
+	int snakeSpeedupCounter = 0;
 	bool gameIsOver = false;
 	bool gameIsStarted = false;
 	/********************************/
