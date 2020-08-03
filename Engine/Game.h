@@ -53,6 +53,7 @@ private:
 	Goal goal;
 	static constexpr int snakeMovePeriod = 20;
 	int snakeMoveCounter = 20;
-	bool isGameOver = false;
+	bool gameIsOver = false;
+	bool gameIsStarted = false;
 	/********************************/
 };
