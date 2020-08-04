@@ -38,6 +38,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	//change
 }
 
 void Game::ComposeFrame()
